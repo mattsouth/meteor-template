@@ -3,7 +3,7 @@
 [x] Login / logout
 [x] Sign up
 [ ] Account profile
-[ ] Account settings
+[x] Account settings
 
 # Issues
 [ ] "Signed in as" shouldnt look like it's clickable

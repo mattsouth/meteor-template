@@ -7,7 +7,8 @@ import './main.html';
 
 AccountsTemplates.configure({
     defaultLayout: 'layout',
-    showForgotPasswordLink: true
+    showForgotPasswordLink: true,
+    enablePasswordChange: true
 });
 AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('forgotPwd');
@@ -20,6 +21,11 @@ AccountsTemplates.addFields([
   }
 ]);
 AccountsTemplates.configureRoute('signUp');
+
+AccountsTemplates.configureRoute('changePwd',{
+  path:'/settings#password',
+  redirect: '/settings',
+});
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -43,10 +49,38 @@ Router.route('/logout', function() {
 
 Template.layout.helpers({
   avatar() {
-    console.log(Meteor.user());
     return Gravatar.imageUrl(Meteor.user().emails[0].address,{secure:true,size:24});
   },
   username() {
     return Meteor.user().username;
+  }
+});
+
+// default route
+Router.route('/profile', function () {
+  // todo: add subscription(s) here
+  if (this.ready()) {
+    this.render('profile');
+  } else {
+    this.render('loading');
+  }
+});
+
+Template.profile.helpers({
+  avatar() {
+    return Gravatar.imageUrl(Meteor.user().emails[0].address,{secure:true,size:200});
+  },
+  user() {
+    return Meteor.user();
+  }
+});
+
+// default route
+Router.route('/settings', function () {
+  // todo: add subscription(s) here
+  if (this.ready()) {
+    this.render('settings');
+  } else {
+    this.render('loading');
   }
 });

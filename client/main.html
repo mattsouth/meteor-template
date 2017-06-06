@@ -63,3 +63,42 @@
     </div>
   {{/if}}
 </template>
+
+<template name="profile">
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="{{avatar}}" style="margin-top: 20px"/>
+      <div><strong>{{ user.username }}</strong></div>
+    </div>
+    <div class="col-sm-9">
+      <div class="jumbotron" style="margin-top:20px">
+        <h2>Profile</h2>
+        <p>Profile content goes here.</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="settings">
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><a href="#account" role="tab" data-toggle="tab">Account</a></li>
+        <li role="presentation"><a href="#password" role="tab" data-toggle="tab">Password</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="account">
+          <div class="jumbotron" style="margin-top:20px">
+            <h2>Account</h2>
+            <p>TODO: account form</p>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="password">
+          {{> atForm state="changePwd"}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
