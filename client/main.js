@@ -5,18 +5,11 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Accounts.onLogin(function(){
-  if ($('#login-dropdown-list').hasClass('open')) {
-    // in mobile view we want to close the whole navbar on login
-    $(".navbar-collapse").collapse('hide');
-    // only do this redirect when an actual login is made, not just a page reload
-    Router.go('/');
-  }
+AccountsTemplates.configure({
+    defaultLayout: 'layout'
 });
-
-Accounts.onLogout(function(){
-  Router.go('/');
-});
+AccountsTemplates.configureRoute('signIn');
+AccountsTemplates.configureRoute('signUp');
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -29,5 +22,21 @@ Router.route('/', function () {
     this.render('home');
   } else {
     this.render('loading');
+  }
+});
+
+Router.route('/logout', function() {
+  Meteor.logout(function() {
+    Router.go('/');
+  });
+})
+
+Template.layout.helpers({
+  avatar() {
+    console.log(Meteor.user());
+    return Gravatar.imageUrl(Meteor.user().emails[0].address,{secure:true,size:24});
+  },
+  username() {
+    return Meteor.user().username;
   }
 });

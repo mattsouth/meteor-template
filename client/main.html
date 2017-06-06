@@ -19,17 +19,22 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser }}
-            <ul class="dropdown-menu">
-              <li>Signed in as<br/>Someone</li>
-              <li role="separator" class="divider"></li>
-              <li><a href="/profile">Your Profile</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="/settings">Settings</a></li>
-              <li><a href="/logout">Logout</a></li>
-            </ul>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ avatar }}"/> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a>Signed in as<br><strong>{{ username }}</strong></a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/profile">Your Profile</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </li>
           {{else}}
+            <li><a href="/sign-up">Sign on</a></li>
             <li><a href="/sign-in">Sign in</a></li>
-            <li><a href="/register">Sign on</a></li>
           {{/if}}
         </ul>
       </div>
@@ -57,11 +62,4 @@
       <p>This is the page for unauthenticated users.</p>
     </div>
   {{/if}}
-</template>
-
-<template name="notfound">
-  <div class="jumbotron" style="margin-top:20px">
-    <h2>Oooops</h2>
-    <p>Ummm, there's nothing here.  Sorry about that.</p>
-  </div>
 </template>
