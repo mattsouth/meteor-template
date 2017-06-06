@@ -6,9 +6,19 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 AccountsTemplates.configure({
-    defaultLayout: 'layout'
+    defaultLayout: 'layout',
+    showForgotPasswordLink: true
 });
 AccountsTemplates.configureRoute('signIn');
+AccountsTemplates.configureRoute('forgotPwd');
+AccountsTemplates.addFields([
+  {
+      _id: 'username',
+      type: 'text',
+      displayName: "Username",
+      required: true
+  }
+]);
 AccountsTemplates.configureRoute('signUp');
 
 Router.configure({
