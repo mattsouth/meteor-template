@@ -4,6 +4,7 @@
 [x] Sign up
 [ ] Account profile
 [x] Account settings
+[ ] Behavioural testing
 
 # Issues
 [ ] "Signed in as" shouldnt look like it's clickable
