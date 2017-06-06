@@ -1,25 +1,67 @@
 <head>
-  <title>meteor-template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meteor Template</title>
 </head>
 
-<body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="layout" role="document">
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand">Template</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          {{#if currentUser }}
+            <ul class="dropdown-menu">
+              <li>Signed in as<br/>Someone</li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/profile">Your Profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/settings">Settings</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          {{else}}
+            <li><a href="/sign-in">Sign in</a></li>
+            <li><a href="/register">Sign on</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" role="main" id="wrapper">
+    <!-- page content -->
+    {{> yield}}
+  </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="loading">
+  <h3>Loading...</h3>
+</template>
+
+<template name="home">
+  {{#if currentUser}}
+    <div class="jumbotron" style="margin-top:20px">
+      <h2>Ah, there you are</h2>
+      <p>This is the page for authenticated users.</p>
+    </div>
+  {{else}}
+    <div class="jumbotron" style="margin-top:20px">
+      <h2>Welcome</h2>
+      <p>This is the page for unauthenticated users.</p>
+    </div>
+  {{/if}}
+</template>
+
+<template name="notfound">
+  <div class="jumbotron" style="margin-top:20px">
+    <h2>Oooops</h2>
+    <p>Ummm, there's nothing here.  Sorry about that.</p>
+  </div>
 </template>
